@@ -16,7 +16,7 @@ export const paginatedTokensSchema = z.object({
 
 export type TCreateTokenSchema = z.infer<typeof createTokenSchema>
 export const createTokenSchema = z.object({
-  expiresAt: z.nullable(z.date())
+  expiresAt: z.date().nullish()
 })
 
 export type TSelectTokenSchema = z.infer<typeof selectTokenSchema>
