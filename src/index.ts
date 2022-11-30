@@ -1,8 +1,19 @@
 import { fastify, FastifyInstance } from 'fastify'
 import { IncomingMessage, Server, ServerResponse } from 'http'
 
+import authRoutes from './modules/routes/auth'
+import configPlugin from './plugins/config'
+import jwtPlugin from './plugins/jwt'
+import prismaPlugin from './plugins/prisma'
+
 const server: FastifyInstance<Server, IncomingMessage, ServerResponse> =
   fastify({ logger: true })
+
+server.register(configPlugin)
+server.register(prismaPlugin)
+server.register(jwtPlugin)
+
+server.register(authRoutes)
 
 const start = async () => {
   try {
