@@ -2,10 +2,13 @@ import { fastify, FastifyInstance } from 'fastify'
 import { IncomingMessage, Server, ServerResponse } from 'http'
 
 import authRoutes from './modules/routes/auth'
+import mathRoutes from './modules/routes/math'
 import tokenRoutes from './modules/routes/token'
 import configPlugin from './plugins/config'
 import jwtPlugin from './plugins/jwt'
 import prismaPlugin from './plugins/prisma'
+import tokenPlugin from './plugins/token'
+
 
 const server: FastifyInstance<Server, IncomingMessage, ServerResponse> =
   fastify({ logger: true })
@@ -13,9 +16,11 @@ const server: FastifyInstance<Server, IncomingMessage, ServerResponse> =
 server.register(configPlugin)
 server.register(prismaPlugin)
 server.register(jwtPlugin)
+server.register(tokenPlugin)
 
 server.register(authRoutes)
 server.register(tokenRoutes)
+server.register(mathRoutes)
 
 const start = async () => {
   try {
