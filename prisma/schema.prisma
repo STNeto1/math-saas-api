@@ -30,4 +30,6 @@ model AccessToken {
 
   User   User   @relation(fields: [userId], references: [id])
   userId String @map("user_id")
+
+  @@index([token])
 }
